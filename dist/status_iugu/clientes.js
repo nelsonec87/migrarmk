@@ -21,7 +21,11 @@ var Clientes = (function () {
         rest.post(this.url)
             .auth({ user: this.API_KEY })
             .type('json').send(JSON.stringify(cliente))
-            .end(function (resp) { return cb(resp.body); });
+            .end(function (resp) {
+            if (!resp.ok)
+                console.log('ERRROOOOO', resp);
+            cb(resp.body);
+        });
     };
     Clientes.prototype.alterar = function (id, cliente, cb) {
         rest.put(this.url + id)

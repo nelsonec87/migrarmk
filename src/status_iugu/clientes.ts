@@ -26,7 +26,10 @@ export class Clientes {
         rest.post(this.url)
             .auth({ user: this.API_KEY })
             .type('json').send(JSON.stringify(cliente))
-            .end(resp => cb(resp.body));
+             .end(resp => {
+                if (!resp.ok) console.log('ERRROOOOO', resp);
+                cb(resp.body)
+            });
     }
     alterar(id, cliente: ICliente, cb) {
         //validar dados
