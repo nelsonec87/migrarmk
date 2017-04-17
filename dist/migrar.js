@@ -25,6 +25,7 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
             { name: 'grupo', value: a.grupo },
         ]
     }); });
-    console.log(novos[0]);
+    for (var i in novos)
+        api.clientes.criar(novos[i], function (r) { console.log(r.id); });
 });
 connection.end();

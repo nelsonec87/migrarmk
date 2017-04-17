@@ -28,7 +28,9 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
         ]
     }));
 
-    console.log(novos[0])
+    // console.log(novos[0])
+    for (let i in novos)
+        api.clientes.criar(novos[i], (r) => { console.log(r.id) })
 });
 
 connection.end();
