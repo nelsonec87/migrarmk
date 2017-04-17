@@ -6,11 +6,9 @@ let api = new Iugu('8044757e9f5d418a2f33e32c77d74270');
 
 
 
-// api.clientes.listar({}, resultado => {
-//     console.log(resultado);
-//     for (let i in resultado.items)
-//         api.clientes.excluir(resultado.items[i].id, (r) => { console.log(r) });
-// });
+api.clientes.listar({limit:1}, resultado => {
+    console.log(resultado);
+});
 
 // api.assinaturas.listar((err, resultado) => {
 //     console.log(resultado);
@@ -52,8 +50,8 @@ let api = new Iugu('8044757e9f5d418a2f33e32c77d74270');
 //     })
 // })
 
-api.clientes.listar({}, (lista) => {
-    async.eachSeries(lista.items, (ass, cb) => {
-        api.clientes.excluir(ass.id, () => { console.log(ass.id); cb(); })
-    })
-})
+// api.clientes.listar({}, (lista) => {
+//     async.eachSeries(lista.items, (ass, cb) => {
+//         api.clientes.excluir(ass.id, () => { console.log(ass.id); cb(); })
+//     })
+// })

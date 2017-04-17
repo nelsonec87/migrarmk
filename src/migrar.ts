@@ -57,7 +57,7 @@ connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function
 
             api.assinaturas.criar(ass, (r) => {
                 console.log(r);
-                cb(null, true);
+                cb();
             });
         })
     });

@@ -21,7 +21,11 @@ var Assinaturas = (function () {
         rest.post(this.url)
             .auth({ user: this.API_KEY })
             .type('json').send(JSON.stringify(assinatura))
-            .end(function (resp) { return cb(resp.body); });
+            .end(function (resp) {
+            if (!resp.ok)
+                console.log('ERRROOOOO', resp);
+            cb(resp.body);
+        });
     };
     return Assinaturas;
 }());

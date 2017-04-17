@@ -24,7 +24,10 @@ export class Assinaturas {
         rest.post(this.url)
             .auth({ user: this.API_KEY })
             .type('json').send(JSON.stringify(assinatura))
-            .end(resp => cb(resp.body));
+            .end(resp => {
+                if (!resp.ok) console.log('ERRROOOOO', resp);
+                cb(resp.body)
+            });
     }
     // alterar(id, cliente: IAssinatura, cb) {
     //     //validar dados
