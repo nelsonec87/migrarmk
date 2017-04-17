@@ -13,12 +13,12 @@ export class Assinaturas {
     //         .end(resp => cb(resp.body));
 
     // }
-    // excluir(id, cb: (resp) => void) {
-    //     rest.delete(this.url + id)
-    //         .auth({ user: this.API_KEY })
-    //         .end(resp => cb(resp.body));
+    excluir(id, cb: (resp) => void) {
+        rest.delete(this.url + id)
+            .auth({ user: this.API_KEY })
+            .end(resp => cb(resp.body));
 
-    // }
+    }
 
     criar(assinatura: IAssinatura, cb) {
         rest.post(this.url)

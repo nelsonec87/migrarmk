@@ -43,6 +43,7 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
         var ass = {
             plan_identifier: PLANOS[plano],
             customer_id: r.id,
+            expire_at: '2017-04-25'
         };
         console.log(ass);
         api.assinaturas.criar(ass, function (r) { console.log(r); });
