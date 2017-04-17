@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "target": "es5"
+    }
+}
