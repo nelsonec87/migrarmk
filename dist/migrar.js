@@ -14,7 +14,8 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
     if (error)
         throw error;
     var novos = results.map(function (a) { return ({
-        email: a.email,
+        plano: a.plano,
+        email: a.email + '.teste',
         name: a.nome,
         cpf_cnpj: a.cpf_cnpj,
         street: a.endereco,
@@ -25,7 +26,8 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
             { name: 'grupo', value: a.grupo },
         ]
     }); });
-    for (var i in novos)
-        api.clientes.criar(novos[i], function (r) { console.log(r.id); });
+    api.clientes.criar(novos[0], function (r) {
+        console.log(r.id);
+    });
 });
 connection.end();

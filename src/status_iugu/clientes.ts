@@ -13,6 +13,12 @@ export class Clientes {
             .end(resp => cb(resp.body));
 
     }
+    excluir(id, cb: (resp) => void) {
+        rest.delete(this.url + id)
+            .auth({ user: this.API_KEY })
+            .end(resp => cb(resp.body));
+
+    }
 
     criar(cliente: ICliente, cb) {
         //validar dados
@@ -35,7 +41,7 @@ export class Clientes {
             .end(resp => cb(resp.body));
     }
 
- }
+}
 
 export interface ICliente {
     id?: string;

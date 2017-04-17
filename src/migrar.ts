@@ -16,7 +16,8 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
     if (error) throw error;
     // console.log('The solution is: ', results[0]);
     var novos = results.map(a => ({
-        email: a.email,
+        plano: a.plano,
+        email: a.email + '.teste',
         name: a.nome,
         cpf_cnpj: a.cpf_cnpj,
         street: a.endereco,
@@ -29,8 +30,10 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
     }));
 
     // console.log(novos[0])
-    for (let i in novos)
-        api.clientes.criar(novos[i], (r) => { console.log(r.id) })
+    // for (let i in novos)
+    api.clientes.criar(novos[0], (r) => {
+        console.log(r.id)
+    })
 });
 
 connection.end();

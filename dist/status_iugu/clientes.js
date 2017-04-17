@@ -12,6 +12,11 @@ var Clientes = (function () {
             .send(options)
             .end(function (resp) { return cb(resp.body); });
     };
+    Clientes.prototype.excluir = function (id, cb) {
+        rest.delete(this.url + id)
+            .auth({ user: this.API_KEY })
+            .end(function (resp) { return cb(resp.body); });
+    };
     Clientes.prototype.criar = function (cliente, cb) {
         rest.post(this.url)
             .auth({ user: this.API_KEY })
