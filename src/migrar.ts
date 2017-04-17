@@ -55,8 +55,8 @@ connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function
             };
             console.log(ass);
             if (!r.id) {
-                cb();
-                console.log('SEM IDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD')
+                console.log('SEM IDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', cli)
+                return cb();
             }
 
             api.assinaturas.criar(ass, (r) => {
