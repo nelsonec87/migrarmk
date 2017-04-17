@@ -42,7 +42,7 @@ connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function
     }));
 
 
-    async.eachSeries(novos, (cli, cb) => {
+    async.eachLimit(novos, 2, (cli, cb) => {
         // let cli = novos[0];
         let plano = cli.plano;
         delete cli.plano;

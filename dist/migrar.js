@@ -37,7 +37,7 @@ connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function
             { name: 'grupo', value: a.grupo },
         ]
     }); });
-    async.eachSeries(novos, function (cli, cb) {
+    async.eachLimit(novos, 2, function (cli, cb) {
         var plano = cli.plano;
         delete cli.plano;
         api.clientes.criar(cli, function (r) {
