@@ -42,23 +42,25 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
     }));
 
 
-    // async.eachSeries(novos, (cli, cb) => {
-    let cli = novos[0];
-    let plano = cli.plano;
-    delete cli.plano;
-    api.clientes.criar(cli, (r) => {
-        // console.log(r);
-        let ass = {
-            plan_identifier: PLANOS[plano],
-            customer_id: r.id,
-            expires_at: '2017-04-25'
-        };
-        console.log(ass)
+    async.eachSeries(novos, (cli, cb) => {
+        // let cli = novos[0];
+        let plano = cli.plano;
+        delete cli.plano;
+        api.clientes.criar(cli, (r) => {
+            // console.log(r);
+            let ass = {
+                plan_identifier: PLANOS[plano],
+                customer_id: r.id,
+                expires_at: '2017-04-25'
+            };
+            console.log(ass)
 
-        api.assinaturas.criar(ass, (r) => { console.log(r) });
-        // cb(null, true);
-    })
-    // });
+            api.assinaturas.criar(ass, (r) => {
+                console.log(r);
+                cb(null, true);
+            });
+        })
+    });
 
     connection.end();
 

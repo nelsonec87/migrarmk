@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mysql = require("mysql");
+var async = require("async");
 var status_iugu_1 = require("./status_iugu");
 var api = new status_iugu_1.Iugu('8044757e9f5d418a2f33e32c77d74270');
 var connection = mysql.createConnection({
@@ -36,17 +37,21 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
             { name: 'grupo', value: a.grupo },
         ]
     }); });
-    var cli = novos[0];
-    var plano = cli.plano;
-    delete cli.plano;
-    api.clientes.criar(cli, function (r) {
-        var ass = {
-            plan_identifier: PLANOS[plano],
-            customer_id: r.id,
-            expires_at: '2017-04-25'
-        };
-        console.log(ass);
-        api.assinaturas.criar(ass, function (r) { console.log(r); });
+    async.eachSeries(novos, function (cli, cb) {
+        var plano = cli.plano;
+        delete cli.plano;
+        api.clientes.criar(cli, function (r) {
+            var ass = {
+                plan_identifier: PLANOS[plano],
+                customer_id: r.id,
+                expires_at: '2017-04-25'
+            };
+            console.log(ass);
+            api.assinaturas.criar(ass, function (r) {
+                console.log(r);
+                cb(null, true);
+            });
+        });
     });
     connection.end();
 });

@@ -42,4 +42,4 @@ let api = new Iugu('8044757e9f5d418a2f33e32c77d74270');
 //     customer_id: 'E0A7D8B2AA6040E08A217523023AD46C',
 // }, (r) => { console.log(r) });
 
-api.assinaturas.excluir('4A3134D47A1D4BF3ABFD1B5DE2F78501',()=>{})
+api.assinaturas.excluir('A2F2A8DC86F74188A09C1D46CAAB7FBD',()=>{})
