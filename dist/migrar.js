@@ -47,6 +47,10 @@ connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function
                 expires_at: '2017-05-' + cli.custom_variables[0].value
             };
             console.log(ass);
+            if (!r.id) {
+                cb();
+                console.log('SEM IDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+            }
             api.assinaturas.criar(ass, function (r) {
                 cb();
             });
