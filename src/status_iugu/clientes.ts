@@ -10,7 +10,7 @@ export class Clientes {
         rest.get(this.url)
             .auth({ user: this.API_KEY })
             .send(options)
-            .end(resp => cb(resp.body));
+            .end(resp => {cb(resp.body)});
 
     }
     excluir(id, cb: (resp) => void) {

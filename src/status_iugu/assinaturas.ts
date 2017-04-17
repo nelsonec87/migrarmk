@@ -6,13 +6,13 @@ export class Assinaturas {
 
     constructor(private API_KEY: string) { }
 
-    // listar(options, cb: (lista: { totalItems: number, items: IAssinatura[] }) => void) {
-    //     rest.get(this.url)
-    //         .auth({ user: this.API_KEY })
-    //         .send(options)
-    //         .end(resp => cb(resp.body));
+    listar(options, cb: (lista: { totalItems: number, items: IAssinatura[] }) => void) {
+        rest.get(this.url)
+            .auth({ user: this.API_KEY })
+            .send(options)
+            .end(resp => cb(resp.body));
 
-    // }
+    }
     excluir(id, cb: (resp) => void) {
         rest.delete(this.url + id)
             .auth({ user: this.API_KEY })

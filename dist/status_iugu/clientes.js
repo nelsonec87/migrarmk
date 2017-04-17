@@ -10,7 +10,7 @@ var Clientes = (function () {
         rest.get(this.url)
             .auth({ user: this.API_KEY })
             .send(options)
-            .end(function (resp) { return cb(resp.body); });
+            .end(function (resp) { cb(resp.body); });
     };
     Clientes.prototype.excluir = function (id, cb) {
         rest.delete(this.url + id)

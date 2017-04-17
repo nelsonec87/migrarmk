@@ -21,7 +21,7 @@ var PLANOS = {
     '4_MB_119': '4_Mega',
     '5_Mega': '5_Mega',
 };
-connection.query('SELECT * from sis_cliente', function (error, results, fields) {
+connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function (error, results, fields) {
     if (error)
         throw error;
     var novos = results.map(function (a) { return ({
@@ -32,8 +32,8 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
         street: a.endereco,
         complement: a.complemento,
         custom_variables: [
-            { name: 'celular', value: a.celular },
             { name: 'vencimento', value: a.venc },
+            { name: 'celular', value: a.celular },
             { name: 'grupo', value: a.grupo },
         ]
     }); });
@@ -44,7 +44,7 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
             var ass = {
                 plan_identifier: PLANOS[plano],
                 customer_id: r.id,
-                expires_at: '2017-04-25'
+                expires_at: '2017-05-' + cli.custom_variables[0].value
             };
             console.log(ass);
             api.assinaturas.criar(ass, function (r) {

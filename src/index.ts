@@ -1,4 +1,6 @@
 import { Iugu } from './status_iugu';
+import async = require('async');
+
 
 let api = new Iugu('8044757e9f5d418a2f33e32c77d74270');
 
@@ -42,4 +44,16 @@ let api = new Iugu('8044757e9f5d418a2f33e32c77d74270');
 //     customer_id: 'E0A7D8B2AA6040E08A217523023AD46C',
 // }, (r) => { console.log(r) });
 
-api.assinaturas.excluir('A2F2A8DC86F74188A09C1D46CAAB7FBD',()=>{})
+
+
+// api.assinaturas.listar({}, (lista) => {
+//     async.eachSeries(lista.items, (ass, cb) => {
+//         api.assinaturas.excluir(ass.id, () => { console.log(ass.id); cb(); })
+//     })
+// })
+
+api.clientes.listar({}, (lista) => {
+    async.eachSeries(lista.items, (ass, cb) => {
+        api.clientes.excluir(ass.id, () => { console.log(ass.id); cb(); })
+    })
+})
