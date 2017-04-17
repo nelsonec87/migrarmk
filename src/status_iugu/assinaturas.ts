@@ -1,11 +1,43 @@
-import iugu = require('iugu');
+import rest = require('unirest');
 
 export class Assinaturas {
-    constructor(private api: Iugu.IIugu) { }
 
-    listar(cb: (err, lista: IAssinaturaList) => void) {
-        this.api.subscriptions.list(cb);
+    private url = 'https://api.iugu.com/v1/subscriptions/';
+
+    constructor(private API_KEY: string) { }
+
+    // listar(options, cb: (lista: { totalItems: number, items: IAssinatura[] }) => void) {
+    //     rest.get(this.url)
+    //         .auth({ user: this.API_KEY })
+    //         .send(options)
+    //         .end(resp => cb(resp.body));
+
+    // }
+    // excluir(id, cb: (resp) => void) {
+    //     rest.delete(this.url + id)
+    //         .auth({ user: this.API_KEY })
+    //         .end(resp => cb(resp.body));
+
+    // }
+
+    criar(assinatura: IAssinatura, cb) {
+        rest.post(this.url)
+            .auth({ user: this.API_KEY })
+            .type('json').send(JSON.stringify(assinatura))
+            .end(resp => cb(resp.body));
     }
+    // alterar(id, cliente: IAssinatura, cb) {
+    //     //validar dados
+    //     rest.put(this.url + id)
+    //         .auth({ user: this.API_KEY })
+    //         .type('json').send(JSON.stringify(cliente))
+    //         .end(resp => cb(resp.body));
+    // }
+    // findById(id, cb) {
+    //     rest.get(this.url + id)
+    //         .auth({ user: this.API_KEY })
+    //         .end(resp => cb(resp.body));
+    // }
 
 }
 

@@ -10,6 +10,16 @@ var connection = mysql.createConnection({
     database: 'mkradius'
 });
 connection.connect();
+var PLANOS = {
+    '1_Mega': '1_Mega',
+    '2_Mega': '2_Mega',
+    '2_Mega_59_90': '2_Mega_59_90',
+    '2_Mega_69_90': '2_Mega_69_90',
+    '3_Mega': '3_Mega',
+    '4_Mega': '4_Mega',
+    '4_MB_119': '4_Mega',
+    '5_Mega': '5_Mega',
+};
 connection.query('SELECT * from sis_cliente', function (error, results, fields) {
     if (error)
         throw error;
@@ -26,8 +36,15 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
             { name: 'grupo', value: a.grupo },
         ]
     }); });
-    api.clientes.criar(novos[0], function (r) {
-        console.log(r.id);
+    var cli = novos[0];
+    var plano = cli.plano;
+    delete cli.plano;
+    api.clientes.criar(cli, function (r) {
+        console.log(r);
+        api.assinaturas.criar({
+            plan_identifier: PLANOS[plano],
+            customer_id: cli.id,
+        }, function (r) { console.log(r); });
     });
+    connection.end();
 });
-connection.end();

@@ -4,11 +4,11 @@ let api = new Iugu('8044757e9f5d418a2f33e32c77d74270');
 
 
 
-api.clientes.listar({}, resultado => {
-    console.log(resultado);
-    for (let i in resultado.items)
-        api.clientes.excluir(resultado.items[i].id, (r) => { console.log(r) });
-});
+// api.clientes.listar({}, resultado => {
+//     console.log(resultado);
+//     for (let i in resultado.items)
+//         api.clientes.excluir(resultado.items[i].id, (r) => { console.log(r) });
+// });
 
 // api.assinaturas.listar((err, resultado) => {
 //     console.log(resultado);
@@ -36,3 +36,8 @@ api.clientes.listar({}, resultado => {
 // })
 
 // api.clientes.teste();
+
+api.assinaturas.criar({
+    plan_identifier: '1mb',
+    customer_id: 'E0A7D8B2AA6040E08A217523023AD46C',
+}, (r) => { console.log(r) });

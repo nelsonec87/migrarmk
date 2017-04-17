@@ -1,4 +1,5 @@
 import mysql = require('mysql');
+import async = require('async');
 import { Iugu } from './status_iugu';
 
 let api = new Iugu('8044757e9f5d418a2f33e32c77d74270');
@@ -11,6 +12,17 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
+
+let PLANOS = {
+    '1_Mega': '1_Mega',
+    '2_Mega': '2_Mega',
+    '2_Mega_59_90': '2_Mega_59_90',
+    '2_Mega_69_90': '2_Mega_69_90',
+    '3_Mega': '3_Mega',
+    '4_Mega': '4_Mega',
+    '4_MB_119': '4_Mega',
+    '5_Mega': '5_Mega',
+};
 
 connection.query('SELECT * from sis_cliente', function (error, results, fields) {
     if (error) throw error;
@@ -29,14 +41,23 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
         ]
     }));
 
-    // console.log(novos[0])
-    // for (let i in novos)
-    api.clientes.criar(novos[0], (r) => {
-        console.log(r.id)
-    })
-});
 
-connection.end();
+    // async.eachSeries(novos, (cli, cb) => {
+    let cli = novos[0];
+    let plano = cli.plano;
+    delete cli.plano;
+    api.clientes.criar(cli, (r) => {
+        console.log(r);
+
+        api.assinaturas.criar({
+            plan_identifier: PLANOS[plano],
+            customer_id: cli.id,
+        }, (r) => { console.log(r) });
+        // cb(null, true);
+    })
+    // });
+
+    connection.end();
 
 // api.clientes.criar({
 //     "email": "cliente9@statussistemas.com.br",
