@@ -14,21 +14,21 @@ connection.connect();
 
 connection.query('SELECT * from sis_cliente', function (error, results, fields) {
     if (error) throw error;
-    console.log('The solution is: ', results[0]);
-    // var novos = results.map(a => ({
-    //     email: a.email,
-    //     name: a.nome,
-    //     cpf_cnpj: a.cpf_cnpj,
-    //     street: a.endereco,
-    //     complement: a.complemento,
-    //     custom_variables: [
-    //         { name: 'celular', value: a.celular },
-    //         { name: 'vencimento', value: a.venc },
-    //         { name: 'grupo', value: a.grupo },
-    //     ]
-    // }));
+    // console.log('The solution is: ', results[0]);
+    var novos = results.map(a => ({
+        email: a.email,
+        name: a.nome,
+        cpf_cnpj: a.cpf_cnpj,
+        street: a.endereco,
+        complement: a.complemento,
+        custom_variables: [
+            { name: 'celular', value: a.celular },
+            { name: 'vencimento', value: a.venc },
+            { name: 'grupo', value: a.grupo },
+        ]
+    }));
 
-    // console.log(novos[0])
+    console.log(novos[0])
 });
 
 connection.end();
