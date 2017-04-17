@@ -51,7 +51,7 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
         let ass = {
             plan_identifier: PLANOS[plano],
             customer_id: r.id,
-            expire_at:  '2017-04-25'
+            expires_at: '2017-04-25'
         };
         console.log(ass)
 
@@ -62,6 +62,7 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
 
     connection.end();
 
+});
 // api.clientes.criar({
 //     "email": "cliente9@statussistemas.com.br",
 //     "name": "cliente 9",
