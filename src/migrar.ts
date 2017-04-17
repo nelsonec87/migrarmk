@@ -53,8 +53,8 @@ connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function
                 customer_id: r.id,
                 expires_at: '2017-05-' + cli.custom_variables[0].value
             };
-            console.log(ass);
             if (!r.id) {
+                console.log(ass);
                 console.log('SEM IDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD', cli)
                 return cb();
             }
