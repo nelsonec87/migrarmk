@@ -42,7 +42,7 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
     api.clientes.criar(cli, function (r) {
         var ass = {
             plan_identifier: PLANOS[plano],
-            customer_id: cli.id,
+            customer_id: r.id,
         };
         console.log(ass);
         api.assinaturas.criar(ass, function (r) { console.log(r); });

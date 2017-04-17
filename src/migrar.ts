@@ -50,7 +50,7 @@ connection.query('SELECT * from sis_cliente', function (error, results, fields) 
         // console.log(r);
         let ass = {
             plan_identifier: PLANOS[plano],
-            customer_id: cli.id,
+            customer_id: r.id,
         };
         console.log(ass)
 
