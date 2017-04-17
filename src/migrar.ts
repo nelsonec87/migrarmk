@@ -53,7 +53,7 @@ connection.query('SELECT * from sis_cliente where cli_ativado = \'s\'', function
                 customer_id: r.id,
                 expires_at: '2017-05-' + cli.custom_variables[0].value
             };
-            // console.log(ass)
+            console.log(ass)
 
             api.assinaturas.criar(ass, (r) => {
                 // console.log(r);
